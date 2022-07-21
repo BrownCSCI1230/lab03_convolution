@@ -1,16 +1,13 @@
 #  Convolution
-
-
+Download the Github repo here.
 
 ## Prologue
 
-The purpose of today's lab is to introduce you to image processing which will help you prepare for our next project, **Filter**, where you will create slightly more complicated filters than the ones we introduce here. 
+The purpose of today's lab is to introduce you to image processing which will help you prepare for our next project, **Filter**, where you will create slightly more complicated filters than the ones we will introduce here. 
 
-In this lab, you will learn about convolutions, and design kernels to do desired jobs, and end up with several filters that does interesting stuff to your images.
+In this lab, you will learn about kernels and convolutions and how they can be applied to images to produce different image processing effects. 
 
 Lets get started!
-
-
 
 ## Intro
 
@@ -30,22 +27,15 @@ Let’s set-up the `filterImage()` function to apply the appropriate effect when
 
 Take a look at filter functions at [location]
 
-They are functions used to do a certain kind of operations on images. Such as turn the image from colorful to grayscale, move the  image to the right, scale the image up or down, etc.
+These functions are used to do specific operations on images.
+1. `[function]` Turns the image from a colorful to grayscale
+2. `[function]` Moves the image to the right
+3. `[function]` Scales the image up or down
 
-**Task:**
-
-Use the information in the global `Settings` object in order to figure out what specific filter will be applied to the image.
-
-- Head over to `Settings.h` to see the enumeration that contains all filter type names. ○
-
-- Reminder that enums can be accessed by `EnumName::EnumValue`
-
-- In `Canvas2D`, call the appropriate functions when different EnumValue  are passed.
-
-- Note that `FilterShift` takes in an additional argument, `ShiftDirection`
-
-*Tip: Use a switch statement to keep the code clean and readable!*
-
+|**_Task:_**|
+|:---|
+|**what does this mean** Use the information in the global `Settings` object in order to figure out what specific filter will be applied to the image.|
+|<ul><li>Head over to `Settings.h` to see the enumeration that contains all filter type names.</li><li>Reminder that enums can be accessed by `EnumName::EnumValue`</li><li>In `Canvas2D`, call the appropriate functions when different EnumValue are passed.</li><li>Note that `FilterShift` takes in an additional argument, `ShiftDirection`</li><li>*Tip: Use a switch statement to keep the code clean and readable!*</li></ul>|
 
 
 ## Grayscale Filter
@@ -54,7 +44,7 @@ The first filter we will apply is a grayscale effect.
 
 In this filter, we do not have to use convolution because the value of each pixel after processing is only relevant to its own value before processing. However, it is a fun exercise on how to process pixels on your canvas.
 
-In image processing, a grayscale image is one in which each pixel stores a single value that represents the amount of light passing through that point. In other words, the pixels only carry **intensity** information. These images are usually gray because each channel(RGB) is set to the same value. Black (i.e. zero) signifies the weakest light intensity, and white (i.e. 255, since we have 8 bits per channel to store the sampled pixel data) represents the strongest light intensity. 
+In image processing, a grayscale image is one in which each pixel stores a single value that represents the amount of light passing through that point. In other words, the pixels only carry **intensity** information. These images are usually gray because each channel (RGB) is set to the same value. Black (i.e. zero) signifies the weakest light intensity, and white (i.e. 255, since we have 8 bits per channel to store the sampled pixel data) represents the strongest light intensity. 
 
 This isn't the only way to do grayscale as we can create various grayscale effects that enhance different information about an image with different algorithms, but this is the most standard application and the one that we will start with.
 
