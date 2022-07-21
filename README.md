@@ -48,10 +48,13 @@ In image processing, a grayscale image is one in which each pixel stores a singl
 
 This isn't the only way to do grayscale as we can create various grayscale effects that enhance different information about an image with different algorithms, but this is the most standard application and the one that we will start with.
 
+<!---
 |**_Task:_**|
 |:---|
 |<ol><li>Head over to the FilterGray function.</li><li>Make a call to the `RGBAToGray()` and store the gray `unsigned char` value that represents the light intensity at `current_pixel`.</li><ul><li>We will use the `RGBAToGray()` method in order to calculate the appropriate shade of gray that represents the intensity of the pixel. This function will map the pixel’s three RGB values to a single light intensity value.</li></ul><li>Set the final color of the pixel using the value `RGBAToGray()` returns.</li></ol>|
+-->
 
+**TODO: EDIT THESE TWO CONSECUTIVE TASKS AFTER LOOKING AT WHAT THE CODE LOOKS LIKE**
 |**_Task:_**|
 |:---|
 |<ol><li>Return the correct gray value by computing a weighted sum of the R, G and B components of the incoming pixel.</li><ul><li>Make sure that the image does not keep getting darker as you apply the grayscale filter.</li></ul></ol>|
@@ -79,15 +82,12 @@ Set the final color of the pixel using the value `RGBAToGray()` returns.
 
 ## Invert Filter
 
-It only takes a little more effort to implement an invert image filter. It is also known as the negative effect, this method works by inverting the value of each color channel for a pixel. In order to invert a channel, we subtract its value from the maximum color value, which in this case is 255.
+It only takes a little more effort to implement an invert image filter. It is also known as the negative effect. This method works by inverting the value of each color channel for each pixel. In order to invert a channel, we subtract its value from the maximum color value, which in this case is 255.
 
-**Task:** 
 
-In the`FilterInvert()` function,
-
-- Invert each color channel of `current_pixel`.
-
-*Tip: If you take the inversion of the inverted pixel data, you should end up with the original image! Test this out by simply double-filtering an image with the invert filter.*
+|**_Task:_**|
+|:---|
+|<ol><li>In the`FilterInvert()` function, invert each color channel of `current_pixel`.</li></ol><ul><li>*Tip: If you take the inversion of the inverted pixel data, you should end up with the original image! Test this out by simply double-filtering an image with the invert filter.*</li></ul>|
 
 
 
@@ -103,11 +103,11 @@ Let’s look at the example below. For simplicity, let us represent our image da
 
 To obtain the final value that will be used to update the pixel of interest (i.e. the pixel with intensity **201**), we will add up all of the multiplications in image (c) to obtain a final value of
 
-(0 * 164) + (1 * 188) + (1 * 178) + (1 * 201) + (1 * 197) + (0 * 174) + (1 * 168) + (1 * 181) = 932
+$$(0 * 164) + (1 * 188) + (1 * 178) + (1 * 201) + (1 * 197) + (0 * 174) + (1 * 168) + (1 * 181) = 932$$
 
-Before updating the pixel with this value, we must divide by the sum of the kernel coefficients to preserve overall brightness. The final value will be: 932/5 = 186.4
+Before updating the pixel with this value, we must divide by the sum of the kernel coefficients to preserve overall brightness. The final value will be: $$932/5 = 186.4$$
 
-As you can probably guess, convolution in two dimensions is very expensive to perform due to the rapid accumulation of multiplication operations when kernel dimensions become large. However, if the kernel is **separable**, then the computation can be reduced to *M* + *N* multiplications. You will need to implement separable kernels for at least one filter in the upcoming filter assignment. For this lab, we will only cover convolution with 2D kernels.
+As you can probably guess, convolution in two dimensions is very expensive to perform due to the rapid accumulation of multiplication operations when kernel dimensions become large. However, if the kernel is **separable**, then the computation can be reduced to *M* + *N* multiplications, where *M* and *N* are the height and width of the kernel. You will need to implement separable kernels for at least one filter in the upcoming filter assignment. For this lab, we will only cover convolution with 2D kernels.
 
 *Tip: Since convolution becomes very inefficient with large images, we recommend you use small to medium-sized data for testing.*
 
@@ -115,12 +115,12 @@ As you can probably guess, convolution in two dimensions is very expensive to pe
 
 We will now fill in the `Convolve2D()` method in the `FilterUtils` namespace. We need to store the new image data in a different `RGBA` array so as to not overwrite the original pixel data during the convolution process.
 
+|**_Task:_**|
+|:---|
+|<ol><li>Initialize a `result` array to store the new `RGBA` values, using the incoming image `width` and `height`.</li></ol>|
+
+
 **Task:**
-
-- Initialize a `result` array to store the new `RGBA` values, using the incoming image `width` and `height`.
-
-**Task:**
-
 In order to iterate through the kernel, we will need its width and height,
 
 - Obtain the dimensions of `kernel` and initialize it at the beginning of the convolve function
