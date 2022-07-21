@@ -32,10 +32,10 @@ These functions are used to do specific operations on images.
 2. `[function]` Moves the image to the right
 3. `[function]` Scales the image up or down
 
+
 |**_Task:_**|
 |:---|
-|**what does this mean** Use the information in the global `Settings` object in order to figure out what specific filter will be applied to the image.|
-|<ul><li>Head over to `Settings.h` to see the enumeration that contains all filter type names.</li><li>Reminder that enums can be accessed by `EnumName::EnumValue`</li><li>In `Canvas2D`, call the appropriate functions when different EnumValue are passed.</li><li>Note that `FilterShift` takes in an additional argument, `ShiftDirection`</li><li>*Tip: Use a switch statement to keep the code clean and readable!*</li></ul>|
+|<ol><li>Use the information in the global `Settings` object in order to figure out what specific filter will be applied to the image.</li><li>Head over to `Settings.h` to see the enumeration that contains all filter type names.</li><ul><li>Reminder that enums can be accessed by `EnumName::EnumValue`</li></ul><li>In `Canvas2D`, call the appropriate functions when different EnumValue are passed.</li><ul><li>Note that `FilterShift` takes in an additional argument, `ShiftDirection`</li><li>*Tip: Use a switch statement to keep the code clean and readable!*</li></ul></ol>|
 
 
 ## Grayscale Filter
@@ -48,35 +48,26 @@ In image processing, a grayscale image is one in which each pixel stores a singl
 
 This isn't the only way to do grayscale as we can create various grayscale effects that enhance different information about an image with different algorithms, but this is the most standard application and the one that we will start with.
 
+|**_Task:_**|
+|:---|
+|<ol><li>Head over to the FilterGray function.</li><li>Make a call to the `RGBAToGray()` and store the gray `unsigned char` value that represents the light intensity at `current_pixel`.</li><ul><li>We will use the `RGBAToGray()` method in order to calculate the appropriate shade of gray that represents the intensity of the pixel. This function will map the pixel’s three RGB values to a single light intensity value.</li></ul><li>Set the final color of the pixel using the value `RGBAToGray()` returns.</li></ol>|
 
+|**_Task:_**|
+|:---|
+|<ol><li>Return the correct gray value by computing a weighted sum of the R, G and B components of the incoming pixel.</li><ul><li>Make sure that the image does not keep getting darker as you apply the grayscale filter.</li></ul></ol>|
+|<details><summary>About mapping RGB values to a single gray intensity</summary><ul><li>The method to map RGB values to a the single gray intensity is not unique. For example, the simple *average method* computes the average between the three color channels: Y = (R + G + B) / 3</li><li>The *lightness method*, which will desaturate the image, averages the least prominent and most prominent values:<ul><li>Y = ( MAX(R,G,B) + MIN(R,G,B) ) / 2</li></ul></li><li>The *luminosity method* calculates a weighted sum between the three color channels using percentages that account for the human perceptual system (we recommend this!)<ul><li>Y = 0.299*R + 0.587*G + 0.114*B</li></ul></li></ul></details>|
 
+<!---
 **Task:** 
-
-Head over to the `FilterGray` function.
-
-- Make a call to the `RGBAToGray()` and store the gray `unsigned char` value that represents the light intensity at `current_pixel`.
-
-
-
-We will use the `RGBAToGray()` method in order to calculate the appropriate shade of gray that represents the intensity of the pixel. This function will map the pixel’s three RGB values to a single light intensity value.
-
-Set the final color of the pixel using the value `RGBAToGray()` returns.
-
-**Task:** 
-
 Return the correct gray value by computing a weighted sum of the R, G and B components of the incoming pixel.
-
 - Make sure that the image does not keep getting darker as you apply the grayscale filter.
 
   DROPDOWN：
-
 - The method to map RGB values to a the single gray intensity is not unique. For example, the simple *average method* computes the average between the three color channels: Y = (R + G + B) / 3
-
 - The *lightness method*, which will desaturate the image, averages the least prominent and most prominent values: Y = ( MAX(R,G,B) + MIN(R,G,B) ) / 2
-
 - The *luminosity method* calculates a weighted sum between the three color channels using percentages that account for the human perceptual system (we recommend this!)
-
   Y = 0.299*R + 0.587*G + 0.114*B
+-->
 
 **Task:** 
 
