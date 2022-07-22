@@ -27,10 +27,7 @@ Let’s set-up the `filterImage()` function to apply the appropriate effect when
 
 Take a look at filter functions at [location]
 
-These functions are used to do specific operations on images.
-1. `[function]` Turns the image from a colorful to grayscale
-2. `[function]` Moves the image to the right
-3. `[function]` Scales the image up or down
+These functions are used to do specific operations on images. For example, some operations are to turn the image from colorful to grayscale, move the image to the right, scale the image up or down, etc.
 
 
 |**_Task:_**|
@@ -109,31 +106,24 @@ As you can probably guess, convolution in two dimensions is very expensive to pe
 *Tip: Since convolution becomes very inefficient with large images, we recommend you use small to medium-sized data for testing.*
 
 
+|**_Task:_**|
+|:---|
+|We will now fill in the `Convolve2D()` method in the `FilterUtils` namespace. We need to store the new image data in a different `RGBA` array so as to not overwrite the original pixel data during the convolution process.<br><br><ol><li>Initialize a `result` array to store the new `RGBA` values, using the incoming image `width` and `height`.</li></ol>|
 
-We will now fill in the `Convolve2D()` method in the `FilterUtils` namespace. We need to store the new image data in a different `RGBA` array so as to not overwrite the original pixel data during the convolution process.
 
 |**_Task:_**|
 |:---|
-|<ol><li>Initialize a `result` array to store the new `RGBA` values, using the incoming image `width` and `height`.</li></ol>|
+|In order to iterate through the kernel, we will need its width and height.<br><br><ol><li>Obtain the dimensions of `kernel` and initialize it at the beginning of the convolve function</li><li>Since we can get `kernel.size()`, use a math function to determine the dimensions (refer to the tip below). We included `math.h` for you!</li></ol><ul><li>*Tip: Two dimensional kernels will usually be square matrices since they tend to be symmetric in practice, so you can assume that the width and height are equal in this implementation. You can also assume that the width and height are always odd, since the kernel must be centered around one pixel.*</li></ul>|
 
-In order to iterate through the kernel, we will need its width and height.
-
-|**_Task:_**|
-|:---|
-|<ol><li>Obtain the dimensions of `kernel` and initialize it at the beginning of the convolve function</li><li>Since we can get `kernel.size()`, use a math function to determine the dimensions (refer to the tip below). We included `math.h` for you!</li></ol><ul><li>*Tip: Two dimensional kernels will usually be square matrices since they tend to be symmetric in practice, so you can assume that the width and height are equal in this implementation. You can also assume that the width and height are always odd, since the kernel must be centered around one pixel.*</li></ul>|
-
-The final pixel color will be the summation of the kernel applied to the current pixel as well as its neighbors.
 
 |**_Task:_**|
 |:---|
-|<ol><li>Initialize `red_acc`, `green_acc`, and `blue_acc` *float* variables to store the accumulated color channels.</li><ul><li>Recall that `RGBA` stores channel information as integers. The kernel however, is defined by floats. You will need to convert the pixel data to a float before applying the kernel’s value to it.</li></ul></ol>|
+|The final pixel color will be the summation of the kernel applied to the current pixel as well as its neighbors.<br><br><ol><li>Initialize `red_acc`, `green_acc`, and `blue_acc` *float* variables to store the accumulated color channels.</li><ul><li>Recall that `RGBA` stores channel information as integers. The kernel however, is defined by floats. You will need to convert the pixel data to a float before applying the kernel’s value to it.</li></ul></ol>|
 
-We will now apply the convolution kernel on every pixel as we iterate over the image data.
 
 |**_Task:_**|
 |:---|
-|<ol><li>Iterate over the kernel by creating a nested for-loop using the kernel dimension calculated in the previous tasks.</li><ul><li>You will need two values at each iteration of the for-loop: the current value of the kernel and the value of the pixel that corresponds to that kernel element.</li></ul><li>Update `red_acc`, `green_acc`, and `blue_acc` with the corresponding pixel value multiplied by the value of the kernel at that for-loop iteration.</li></ol><ul><li>*Tip: The index of the current kernel element can be obtained by using the current kernel row, current kernel column and kernel width. The index of the current pixel can be obtained similarly; however, you will need to perform additional steps in order to find the current row and column of the image that pertain to that kernel index.*</li></ul>|
-
+|We will now apply the convolution kernel on every pixel as we iterate over the image data.<br><br><ol><li>Iterate over the kernel by creating a nested for-loop using the kernel dimension calculated in the previous tasks.</li><ul><li>You will need two values at each iteration of the for-loop: the current value of the kernel and the value of the pixel that corresponds to that kernel element.</li></ul><li>Update `red_acc`, `green_acc`, and `blue_acc` with the corresponding pixel value multiplied by the value of the kernel at that for-loop iteration.</li></ol><ul><li>*Tip: The index of the current kernel element can be obtained by using the current kernel row, current kernel column and kernel width. The index of the current pixel can be obtained similarly; however, you will need to perform additional steps in order to find the current row and column of the image that pertain to that kernel index.*</li></ul>|
 
 
 You may have noticed an issue when applying kernels with width and height greater than 1: the kernel extends beyond the boundary of the image, where pixel data is not defined. There are several ways to deal with these edge cases:
@@ -158,21 +148,18 @@ In [Locations], we give you some functions that can be used to deal with pixels 
 
 [outcome]
 
-
 We have implemented function **a** and **c** for you, and you are welcome to apply them to your code.
-
-We ask that you try to implement function **b** and apply it to your code too. How are your outcomes different?
 
 |**_Task:_**|
 |:---|
-|<ol><li>Implement function **b**, `getPixelReflected(i, j)`</li></ol>|
+|We ask that you try to implement function **b** and apply it to your code too. How are your outcomes different?<br><br><ol><li>Implement function **b**, `getPixelReflected(i, j)`</li></ol>|
 
 
 |**_Task:_**|
 |:---|
 |<ol><li>Update the `result` array at the center pixel index.</li><li>Create a `RGBA` variable with the `red_acc`, `green_acc`, and `blue_acc` floats that have been accumulated.</li><ul><li>Use the `REAL2byte()` utility function that has been provided to convert the float back to an integer between 0 and 255.</li></ul></ol>|
 
-During the convolution process, one must divide the accumulated intensity by the sum of the kernel coefficients in order to preserve overall brightness. We will ignore this for now since our Identity and Shift filters do not risk increasing image brightness; however, you will need to take this into account for your Filter project.
+**Note:** During the convolution process, one must divide the accumulated intensity by the sum of the kernel coefficients in order to preserve overall brightness. We will ignore this for now since our Identity and Shift filters do not risk increasing image brightness; however, you will need to take this into account for your Filter project.
 
 |**_Task:_**|
 |:---|
@@ -182,44 +169,35 @@ During the convolution process, one must divide the accumulated intensity by the
 
 ## Identity Filter
 
-Kernels are the key deciding what your convolution operation does to images.
+Kernels are the key to what your convolution operation does to images.
 
-Different kernels are predefined and stored in [location], to make identity filter and shift filter work, you will need modify the kernels used in these operations.
+Different kernels are predefined and stored in [location]. To make the identity filter and shift filter work, you will need modify the kernels used in these operations.
 
 The identity filter will perform the convolution using an identity kernel, i.e. a kernel that, once convolution has been performed, results in the original image.
 
-### Task 13
+|**_Task:_**|
+|:---|
+|We will need the identity filter to use 2D convolution to filter the canvas data that is sent from `Canvas2D` when the filter button is clicked.<br><br><ol><li>In the function `FilterIdentity()`, call `Convolve2D()` from the `FilterUtils` namespace, sending the appropriate canvas information.</li></ol>|
 
-We will need the identity filter to use 2D convolution to filter the canvas data that is sent from `Canvas2D` when the filter button is clicked,
 
-- In the function  `FilterIdentity()` , call `Convolve2D()` from the `FilterUtils` namespace, sending the appropriate canvas information.
-
-### Task 14
-
-The `Convolve2D()` method in `FilterUtils` takes in a kernel that will be used during the convolution process. We will need to initialize it for the identity filter.
-
-- In the `FilterIdentity` initializer list, initialize `m_kernel` to be a vector of floats.
-- The size of the vector may be any odd number; however, remember that once the kernel size gets too large, 2D convolution becomes very slow.
-
+|**_Task:_**|
+|:---|
+|The `Convolve2D()` method in `FilterUtils` takes in a kernel that will be used during the convolution process. We will need to initialize it for the identity filter.<br><br><ol><li>In the `FilterIdentity` initializer list, initialize `m_kernel` to be a vector of floats.</li><ul><li>The size of the vector may be any odd number; however, remember that once the kernel size gets too large, 2D convolution becomes very slow.</li></ul></ol>|
 
 
 ## Shift Filter
 
 The shift filter will shift the image one pixel to the left or right, depending on the value of `m_shiftDir`.
 
-**Task:**
+|**_Task:_**|
+|:---|
+|<ol><li>In the `apply()` method of the `FilterShift` class, call `Convolve2D()` from the `FilterUtils` namespace, sending the appropriate canvas information.</li></ol>|
 
-- In the `apply()` method of the `FilterShift` class, call `Convolve2D()` from the `FilterUtils` namespace, sending the appropriate canvas information.
 
-**Task:**
 
-Now we will need to initialize `m_kernel` for the shift filter.
-
-- In shift filter initializer list, initialize `m_kernel` to be a vector of floats.
-
-- Use the `m_shiftDir` variable to check whether the filter being used is a shift right or shift left filter.
-
-- Depending on the value of this `m_shiftDir` variable, create the appropriate kernel to shift the image *by one pixel*.
+|**_Task:_**|
+|:---|
+|Now we will need to initialize `m_kernel` for the shift filter.<br><br><ol><li>In shift filter initializer list, initialize `m_kernel` to be a vector of floats.</li><li>Use the `m_shiftDir` variable to check whether the filter being used is a shift right or shift left filter.</li><li>Depending on the value of this `m_shiftDir` variable, create the appropriate kernel to shift the image *by one pixel*.</li></ol>|
 
 
 
