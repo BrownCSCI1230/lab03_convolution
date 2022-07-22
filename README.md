@@ -57,8 +57,7 @@ This isn't the only way to do grayscale as we can create various grayscale effec
 **TODO: EDIT THESE TWO CONSECUTIVE TASKS AFTER LOOKING AT WHAT THE CODE LOOKS LIKE**
 |**_Task:_**|
 |:---|
-|<ol><li>Return the correct gray value by computing a weighted sum of the R, G and B components of the incoming pixel.</li><ul><li>Make sure that the image does not keep getting darker as you apply the grayscale filter.</li></ul></ol>|
-|<details><summary>About mapping RGB values to a single gray intensity</summary><ul><li>The method to map RGB values to a the single gray intensity is not unique. For example, the simple *average method* computes the average between the three color channels: Y = (R + G + B) / 3</li><li>The *lightness method*, which will desaturate the image, averages the least prominent and most prominent values:<ul><li>Y = ( MAX(R,G,B) + MIN(R,G,B) ) / 2</li></ul></li><li>The *luminosity method* calculates a weighted sum between the three color channels using percentages that account for the human perceptual system (we recommend this!)<ul><li>Y = 0.299*R + 0.587*G + 0.114*B</li></ul></li></ul></details>|
+|<ol><li>Return the correct gray value by computing a weighted sum of the R, G and B components of the incoming pixel.</li><ul><li>Make sure that the image does not keep getting darker as you apply the grayscale filter.</li></ul></ol><details><summary>*About mapping RGB values to a single gray intensity*</summary><ul><li>The method to map RGB values to a the single gray intensity is not unique. For example, the simple *average method* computes the average between the three color channels: Y = (R + G + B) / 3</li><li>The *lightness method*, which will desaturate the image, averages the least prominent and most prominent values:<ul><li>Y = ( MAX(R,G,B) + MIN(R,G,B) ) / 2</li></ul></li><li>The *luminosity method* calculates a weighted sum between the three color channels using percentages that account for the human perceptual system (we recommend this!)<ul><li>Y = 0.299*R + 0.587*G + 0.114*B</li></ul></li></ul></details>|
 
 <!---
 **Task:** 
@@ -72,12 +71,10 @@ Return the correct gray value by computing a weighted sum of the R, G and B comp
   Y = 0.299*R + 0.587*G + 0.114*B
 -->
 
-**Task:** 
 
-Set the final color of the pixel using the value `RGBAToGray()` returns.
-
-- Update the pixel, which is referenced by the `current_pixel` pointer. Remember to set all three color channels individually by accessing them from `current_pixel` directly!
-
+|**_Task:_**|
+|:---|
+|<ol><li>Let the final color of the pixel using the value `RGBAToGray()` returns.</li><li>Update the pixel, which is referenced by the `current_pixel` pointer. <ul><li>Remember to set all three color channels individually by accessing them from `current_pixel` directly!</li></ul></li></ol>|
 
 
 ## Invert Filter
@@ -119,39 +116,25 @@ We will now fill in the `Convolve2D()` method in the `FilterUtils` namespace. We
 |:---|
 |<ol><li>Initialize a `result` array to store the new `RGBA` values, using the incoming image `width` and `height`.</li></ol>|
 
+In order to iterate through the kernel, we will need its width and height.
 
-**Task:**
-In order to iterate through the kernel, we will need its width and height,
-
-- Obtain the dimensions of `kernel` and initialize it at the beginning of the convolve function
-
-  - Since we can get `kernel.size()`, use a math function to determine the dimensions (refer to the tip below). We included `math.h` for you!
-
-*Tip: Two dimensional kernels will usually be square matrices since they tend to be symmetric in practice, so you can assume that the width and height are equal in this implementation. You can also assume that the width and height are always odd, since the kernel must be centered around one pixel.*
-
-**Task:**
+|**_Task:_**|
+|:---|
+|<ol><li>Obtain the dimensions of `kernel` and initialize it at the beginning of the convolve function</li><li>Since we can get `kernel.size()`, use a math function to determine the dimensions (refer to the tip below). We included `math.h` for you!</li></ol><ul><li>*Tip: Two dimensional kernels will usually be square matrices since they tend to be symmetric in practice, so you can assume that the width and height are equal in this implementation. You can also assume that the width and height are always odd, since the kernel must be centered around one pixel.*</li></ul>|
 
 The final pixel color will be the summation of the kernel applied to the current pixel as well as its neighbors.
 
-- Initialize `red_acc`, `green_acc`, and `blue_acc` *float* variables to store the accumulated color channels.
-
-- Recall that `RGBA` stores channel information as integers. The kernel however, is defined by floats. You will need to convert the pixel data to a float before applying the kernel’s value to it.
-
-**Task:**
+|**_Task:_**|
+|:---|
+|<ol><li>Initialize `red_acc`, `green_acc`, and `blue_acc` *float* variables to store the accumulated color channels.</li><ul><li>Recall that `RGBA` stores channel information as integers. The kernel however, is defined by floats. You will need to convert the pixel data to a float before applying the kernel’s value to it.</li></ul></ol>|
 
 We will now apply the convolution kernel on every pixel as we iterate over the image data.
 
-- Iterate over the kernel by creating a nested for-loop using the kernel dimension calculated in the previous tasks.
-
-- You will need two values at each iteration of the for-loop: the current value of the kernel and the value of the pixel that corresponds to that kernel element.
-
-- - Update `red_acc`, `green_acc`, and `blue_acc` with the corresponding pixel value multiplied by the value of the kernel at that for-loop iteration.
-
-*Tip: The index of the current kernel element can be obtained by using the current kernel row, current kernel column and kernel width. The index of the current pixel can be obtained similarly; however, you will need to perform additional steps in order to find the current row and column of the image that pertain to that kernel index.*
+|**_Task:_**|
+|:---|
+|<ol><li>Iterate over the kernel by creating a nested for-loop using the kernel dimension calculated in the previous tasks.</li><ul><li>You will need two values at each iteration of the for-loop: the current value of the kernel and the value of the pixel that corresponds to that kernel element.</li></ul><li>Update `red_acc`, `green_acc`, and `blue_acc` with the corresponding pixel value multiplied by the value of the kernel at that for-loop iteration.</li></ol><ul><li>*Tip: The index of the current kernel element can be obtained by using the current kernel row, current kernel column and kernel width. The index of the current pixel can be obtained similarly; however, you will need to perform additional steps in order to find the current row and column of the image that pertain to that kernel index.*</li></ul>|
 
 
-
-**Task:**
 
 You may have noticed an issue when applying kernels with width and height greater than 1: the kernel extends beyond the boundary of the image, where pixel data is not defined. There are several ways to deal with these edge cases:
 
@@ -175,33 +158,25 @@ In [Locations], we give you some functions that can be used to deal with pixels 
 
 [outcome]
 
-**Task**：
 
-We have implemented function  a and c for you, and you are welcome to apply them to your code.
+We have implemented function **a** and **c** for you, and you are welcome to apply them to your code.
 
-We ask that you try to implement function b and apply it to your code too. How are your outcomes different?
+We ask that you try to implement function **b** and apply it to your code too. How are your outcomes different?
 
-**Task:**
-
-Update the `result` array at the center pixel index.
-
-- Create a `RGBA` variable with the `red_acc`, `green_acc`, and `blue_acc` floats that have been accumulated.
-
-- Use the `REAL2byte()` utility function that has been provided to convert the float back to an integer between 0 and 255.
-
-- During the convolution process, one must divide the accumulated intensity by the sum of the kernel coefficients in order to preserve overall brightness. We will ignore this for now since our Identity and Shift filters do not risk increasing image brightness; however, you will need to take this into account for your Filter project.
-
-**Task:**
-
-Copy the `result` array to the canvas image data.
-
-- Use `memcpy()` values to transfer the data from the `result` buffer array to the canvas image data.
-
-- The first argument to this function is the destination, while the second argument is the source. The function also requires a third argument, the number of bytes to copy. You will need to obtain this value by using the canvas dimensions, as well as the size of the data type that we use to store the image color intensities.
+|**_Task:_**|
+|:---|
+|<ol><li>Implement function **b**, `getPixelReflected(i, j)`</li></ol>|
 
 
+|**_Task:_**|
+|:---|
+|<ol><li>Update the `result` array at the center pixel index.</li><li>Create a `RGBA` variable with the `red_acc`, `green_acc`, and `blue_acc` floats that have been accumulated.</li><ul><li>Use the `REAL2byte()` utility function that has been provided to convert the float back to an integer between 0 and 255.</li></ul></ol>|
 
-*Tip: The C++ keyword `sizeOf()` returns the size in bytes of a given data type*
+During the convolution process, one must divide the accumulated intensity by the sum of the kernel coefficients in order to preserve overall brightness. We will ignore this for now since our Identity and Shift filters do not risk increasing image brightness; however, you will need to take this into account for your Filter project.
+
+|**_Task:_**|
+|:---|
+|<ol><li>Copy the `result` array to the canvas image data.</li><ul><li>Use `memcpy()` values to transfer the data from the `result` buffer array to the canvas image data.<br><br>The first argument to this function is the destination, while the second argument is the source. The function also requires a third argument, the number of bytes to copy. You will need to obtain this value by using the canvas dimensions, as well as the size of the data type that we use to store the image color intensities.</li></ul></ol><ul><li>*Tip: The C++ keyword `sizeOf()` returns the size in bytes of a given data type*</li></ul>|
 
 
 
