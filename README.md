@@ -1,7 +1,7 @@
-#  Convolution
+# Convolution
 Download the Github repo here.
 
-## Prologue
+## 0. Prologue
 
 The purpose of today's lab is to introduce you to image processing which will help you prepare for our next project, **Filter**, where you will create slightly more complicated filters than the ones we will introduce here. 
 
@@ -9,7 +9,7 @@ In this lab, you will learn about kernels and convolutions and how they can be a
 
 Lets get started!
 
-## Intro
+## 1. Intro
 
 Digital image processing is a field in which certain operations are performed on digital images in order to enhance or extract useful information from them. It's a type of **signal processing** in which our inputs are two-dimensional signals, i.e. images! Unlike sound processing, which measures sound signals over one-dimensional time, image processing measures signals over two-dimensional space.
 
@@ -19,7 +19,7 @@ An image can be defined mathematically by the function f(x, y) where x and y cor
 
 In this lab, we will solely be working in the spatial domain.  
 
-## Filter Set-Up
+## 2. Filter Set-Up
 
 The `Canvas2D` class will be responsible for storing and manipulating the 2-dimensional canvas that will be displayed by the application window. This class has a `filterImage()` function that will be called by `MainWindow` whenever the filter button is clicked.
 
@@ -35,7 +35,7 @@ These functions are used to do specific operations on images. For example, some 
 |<ol><li>Use the information in the global `Settings` object in order to figure out what specific filter will be applied to the image.</li><li>Head over to `Settings.h` to see the enumeration that contains all filter type names.</li><ul><li>Reminder that enums can be accessed by `EnumName::EnumValue`</li></ul><li>In `Canvas2D`, call the appropriate functions when different EnumValue are passed.</li><ul><li>Note that `FilterShift` takes in an additional argument, `ShiftDirection`</li><li>*Tip: Use a switch statement to keep the code clean and readable!*</li></ul></ol>|
 
 
-## Grayscale Filter
+## 2.1 Grayscale Filter
 
 The first filter we will apply is a grayscale effect. 
 
@@ -74,7 +74,7 @@ Return the correct gray value by computing a weighted sum of the R, G and B comp
 |<ol><li>Let the final color of the pixel using the value `RGBAToGray()` returns.</li><li>Update the pixel, which is referenced by the `current_pixel` pointer. <ul><li>Remember to set all three color channels individually by accessing them from `current_pixel` directly!</li></ul></li></ol>|
 
 
-## Invert Filter
+## 2.2 Invert Filter
 
 It only takes a little more effort to implement an invert image filter. It is also known as the negative effect. This method works by inverting the value of each color channel for each pixel. In order to invert a channel, we subtract its value from the maximum color value, which in this case is 255.
 
@@ -85,7 +85,7 @@ It only takes a little more effort to implement an invert image filter. It is al
 
 
 
-## Convolution
+## 3. Convolution
 
 Up until now, we have written filters that deal with each pixel independently, i.e. the final color of a specific pixel in the grayscale and inverse filters did not depend on neighboring pixels. We will now introduce the concept of **convolution**, which allows us to apply operations to a pixel while taking into account information obtained from its neighbors in the spatial domain.
 
@@ -167,7 +167,7 @@ We have implemented function **a** and **c** for you, and you are welcome to app
 
 
 
-## Identity Filter
+## 3.1 Identity Filter
 
 Kernels are the key to what your convolution operation does to images.
 
@@ -185,7 +185,7 @@ The identity filter will perform the convolution using an identity kernel, i.e. 
 |The `Convolve2D()` method in `FilterUtils` takes in a kernel that will be used during the convolution process. We will need to initialize it for the identity filter.<br><br><ol><li>In the `FilterIdentity` initializer list, initialize `m_kernel` to be a vector of floats.</li><ul><li>The size of the vector may be any odd number; however, remember that once the kernel size gets too large, 2D convolution becomes very slow.</li></ul></ol>|
 
 
-## Shift Filter
+## 3.2 Shift Filter
 
 The shift filter will shift the image one pixel to the left or right, depending on the value of `m_shiftDir`.
 
@@ -201,7 +201,7 @@ The shift filter will shift the image one pixel to the left or right, depending 
 
 
 
-## End
+## 4. End
 
 Now you are ready to show your program to a TA to get checked off!
 
