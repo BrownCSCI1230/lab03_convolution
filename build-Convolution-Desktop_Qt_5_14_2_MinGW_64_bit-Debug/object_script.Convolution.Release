@@ -1,0 +1,12 @@
+release/canvas2d.o
+release/FilterGray.o
+release/FilterIdentity.o
+release/FilterInvert.o
+release/FilterShift.o
+release/filterutils.o
+release/main.o
+release/mainwindow.o
+release/settings.o
+release/supportcanvas2d.o
+release/moc_mainwindow.o
+release/moc_supportcanvas2d.o

@@ -28,10 +28,10 @@ public:
 
     // used by support code to provide access to canvas data
     void setImage();
-    void FilterGray(std::vector<RGBA> *canvas);
-    void FilterInvert(std::vector<RGBA> *canvas);
-    void FilterIdentity(std::vector<RGBA> *canvas);
-    void FilterShift(std::vector<RGBA> *canvas);
+    void FilterGray();
+    void FilterInvert();
+    void FilterIdentity();
+    void FilterShift();
 
     std::vector<RGBA> *m_canvas;
     int m_canvasW;

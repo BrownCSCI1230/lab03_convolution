@@ -1,0 +1,12 @@
+debug/canvas2d.o
+debug/FilterGray.o
+debug/FilterIdentity.o
+debug/FilterInvert.o
+debug/FilterShift.o
+debug/filterutils.o
+debug/main.o
+debug/mainwindow.o
+debug/settings.o
+debug/supportcanvas2d.o
+debug/moc_mainwindow.o
+debug/moc_supportcanvas2d.o

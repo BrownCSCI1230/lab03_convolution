@@ -39,11 +39,11 @@ void Canvas2D::paint(int x, int y, std::vector<float> mask, bool smudge) {
 
 void Canvas2D::filterImage() {
     // Filter TODO: filter the image on canvas using the selected filter
-    if(settings.filterType == 0){FilterInvert(m_canvas);}
-    if(settings.filterType == 1){FilterGray(m_canvas);}
-    if(settings.filterType == 2){FilterIdentity(m_canvas);}
-    if(settings.filterType == 3){FilterShift(m_canvas);}
-    if(settings.filterType == 4){FilterShift(m_canvas);}
+    if(settings.filterType == 0){FilterInvert();}
+    if(settings.filterType == 1){FilterGray();}
+    if(settings.filterType == 2){FilterIdentity();}
+    if(settings.filterType == 3){FilterShift();}
+    if(settings.filterType == 4){FilterShift();}
 }
 
 void Canvas2D::setImage() {
